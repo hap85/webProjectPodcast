@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+    <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script defer src="/js/moment.min.js"></script>
+    <script defer type="module" src="/js/main.js"></script>
+
+
+
+    <title>HearMe</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
+            <!-- Toggle the left sidebar -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#left-sidebar"
+                aria-controls="left-sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Logo and title -->
+            <a class="navbar-brand" href="/index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
+                    style=" fill:#000000;">
+                    <g transform="">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <path d="M0,172v-172h172v172z" fill="#343a40"></path>
+                            <g fill="#ffffff">
+                                <path
+                                    d="M41.28,27.52c-20.85812,0 -37.84,16.98188 -37.84,37.84v75.68c0.00019,1.89978 1.54022,3.43981 3.44,3.44h123.84c20.85812,0 37.84,-16.98188 37.84,-37.84v-75.68c-0.00019,-1.89978 -1.54022,-3.43981 -3.44,-3.44zM41.28,34.4h120.4v72.24c0,17.14012 -13.81988,30.96 -30.96,30.96h-120.4v-72.24c0,-17.14012 13.81988,-30.96 30.96,-30.96zM84.32031,64.5c-11.696,0 -18.96031,8.2388 -18.96031,21.5c0,13.2784 7.26431,21.52687 18.96031,21.52687c11.6444,0 18.87969,-8.24847 18.87969,-21.52687c0,-13.2612 -7.23529,-21.5 -18.87969,-21.5zM30.96,65.36v41.28h6.39625v-14.42515h9.39953c7.78816,0 13.44422,-5.61032 13.44422,-13.34344c0,-7.95328 -5.50599,-13.5114 -13.39047,-13.5114zM110.08,65.36v41.28h14.94922c12.18104,0 19.45078,-7.72248 19.45078,-20.65344c0,-12.9172 -7.26974,-20.62656 -19.45078,-20.62656zM84.32031,69.98922c7.92576,0 12.84625,6.13454 12.84625,16.01078c0,9.89344 -4.92049,16.03765 -12.84625,16.03765c-7.97736,0 -12.92688,-6.14765 -12.92688,-16.03765c0,-9.87624 4.95296,-16.01078 12.92688,-16.01078zM37.35625,70.7014h8.14312c5.6588,0 8.65375,2.82424 8.65375,8.17c0,5.08432 -3.15319,8.00203 -8.65375,8.00203h-8.14312zM116.48297,70.75515h8.2036c8.76512,0 13.79359,5.57404 13.79359,15.28516c0,9.65952 -5.02847,15.20453 -13.79359,15.20453h-8.2036z">
+                                </path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                HearMe
+            </a>
+
+            <!-- Search form -->
+            <form class="form-inline my-2 my-lg-0 ml-auto d-none d-sm-block" role="form" action="/search/episodes" method="GET" id="search-form">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-check mb-3 mt-2">
+                                <input class="form-check-input" type="radio" value="0" name="serie" id="episode-radio" checked="checked" >
+                                <label class="form-check-label text-white mr-2" for="serie">
+                                  Episodio
+                                </label>
+                                <input class="form-check-input" type="radio" value="1" name="serie" id="serie-radio">
+                                <label class="form-check-label text-white" for="serie">
+                                  Serie
+                                </label>    
+                              </div>
+                              
+                        </div>
+                        <div class="col-sm">
+                            <input class="form-control mr-sm-2" type="text" id="query" name="textSearch" placeholder="Cerca" required>
+                        </div>
+                        <div class="col-sm">
+                            <button class="btn btn-outline-success ml-5 my-sm-0" type="submit" id="search-button">Cerca</button>
+                        </div>
+                        <div class="col-sm invisible" id="dropdown-search">
+                            <div class="input-group mb-3">
+
+                                <select class="custom-select" name="categorie" id="search-categorie">
+                                    <option value="TUTTI">Tutti</option>
+                                    <option value="ARTE">ARTE</option>
+                                    <option value="MUSICA">MUSICA</option>
+                                    <option value="SALUTE">SALUTE</option>
+                                    <option value="TECNOLOGIA">TECNOLOGIA</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+
+            <!-- Link to the user profile -->
+            <div class="navbar-nav ml-md-auto">
+                <a class="nav-item nav-link not-logged" href="/login" id="login">
+                    <svg class="bi bi-people-circle mx-2" width="30" height="30" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 008 15a6.987 6.987 0 005.468-2.63z" />
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8z"
+                            clip-rule="evenodd" />
+                    </svg>Accedi
+                </a>
+                <ul class="navbar-nav invisible only-logged" id="logout">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="message">
+
+        </div>
+    </header>
+
+    <!-- Content of the page -->
+    <div class="container-fluid">
+        <div class="row vheight-100">
+            <!-- Left sidebar -->
+            <aside class="collapse d-sm-block col-sm-2 col-12 bg-light below-nav" id="left-sidebar">
+                <div class="list-group list-group-flush">
+                    <a href="/series" class="list-group-item categorie-link list-group-item-action active">Tutte le
+                        serie</a>
+                    <div class="list-group-item list-group-item-action" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Categorie</div>
+                    <div id="menu-categories" class="dropdown-menu dropdown-dark">
+                        <a class="dropdown-item categorie-link" href="">ARTE</a>
+                        <a class="dropdown-item categorie-link" href="">MUSICA</a>
+                        <a class="dropdown-item categorie-link" href="">SALUTE</a>
+                        <a class="dropdown-item categorie-link" href="">TECNOLOGIA</a>
+                    </div>
+
+                </div>
+
+                <div class="my-5 only-logged" id="user-menu">
+
+                </div>
+            </aside>
+
+            <!-- Main content -->
+            <main class="container-fluid below-nav mt-3 col-sm-9 col-12" id="main-container">
+                <div class="container">
+                    <div class="card-home">
+                        <div class="card-body">
+                            <h1 class="card-title text-success">HearME</h1>
+                            <p class="card-text">
+                            <h4>Condividi, ascolta e segui le tue serie Podcast preferite</h4>
+                            <button onclick="location.href='/registration'" type="button" url="/registration"
+                                class="ml-5 mt-3 btn btn-primary" id="register-button">Registrati subito</button>
+                            <button button onclick="location.href='/login'" type="button"
+                                class="ml-5 mt-3 btn btn-success">Accedi</button>
+                            </p>
+
+                        </div>
+                        <img src="/js/img/podcast.jpg" class="card-img-top" alt="...">
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- edit Serie Modal -->
+    <div class="modal fade" id="editSerieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Serie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action="" id="serie-form">
+                        <input type="text" id="serie-form-id" hidden>
+                        <div class="form-group">
+                            <label for="serie-title">Titolo</label>
+                            <input type="text" class="form-control" id="serie-title" aria-describedby="Titolo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serie-description">Descrizione</label>
+                            <input type="text" class="form-control" rows="2" id="serie-description"
+                                aria-describedby="Descrizione" required>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="serie-description">Categoria</label>
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <select class="custom-select" id="serie-categorie">
+                                <option value="" selected disabled hidden>Scegli categoria</option>
+                                <option value="ARTE">ARTE</option>
+                                <option value="MUSICA">MUSICA</option>
+                                <option value="SALUTE">SALUTE</option>
+                                <option value="TECNOLOGIA">TECNOLOGIA</option>
+                            </select>
+                            <div class="input-group-append">
+                                <label class="input-group-text" for="serie-categorie" required>Scegli</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="serie-title">Inserisci immagine</label>
+                            <input type="text" class="form-control" id="serie-img" aria-describedby="Titolo" required>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal-serie" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Episode Modal -->
+    <div class="modal fade" id="episodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Episodio</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action="" id="episode-form">
+                        <input type="text" id="form-id" hidden>
+                        <input type="text" id="serie-id" hidden>
+                        <div class="form-group">
+                            <label for="input-description">Descrizione</label>
+                            <input type="text" class="form-control" id="input-description"
+                                aria-describedby="Descrizione" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-sponsor">Sponsor</label>
+                            <input type="text" class="form-control" id="input-sponsor" aria-describedby="Sponsor">
+                        </div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="text" id="input-audio" class="custom-file-input"
+                                    aria-describedby="inputGroupFileAddon04" required>
+                                <label class="custom-file-label" id="label-audio" for="inputGroupFile04">Inserisci file
+                                    audio</label>
+                            </div>
+
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    id="inputGroupFileAddon04">Carica</button>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="inputDescription">Prezzo</label>
+                            <div class="ml-1 mt-1 row">
+                                <input type="text" class="form-control text-right col-3" id="input-price"
+                                    aria-describedby="prezzo">
+                                <span class="align-botton mx-1">Euro</span>
+                            </div>
+
+                        </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal-episode" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Edit comment Modal-->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modifica commento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action="" id="comment-form">
+                        <input type="text" id="form-comment-id" hidden>
+                        <input type="text" id="form-comment-id_serie" hidden>
+                        <div class="form-group">
+                            <label for="input-comment">Testo</label>
+                            <input type="text" rows="2" class="form-control" id="input-comment"
+                                aria-describedby="Commento" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal-comment" class="btn btn-secondary"
+                        data-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
