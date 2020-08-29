@@ -31,7 +31,7 @@ function createListEpisodes() {
                 <h1 class="title-list">Episodi</h1>
                 <button type="button" class="user-btn invisible ml-5 mt-2 btn btn-warning col-2 mb-3 user-btn" data-toggle="modal" data-target="#episodeModal">Aggiungi episodio</button>
             </div>
-            <p>Seleziona l'episodio per visualizzarne i dettagli</p>
+            
             <ul class="mt-4 list-group list-group-flush" id="list-episodes"></ul>`;
 }
 function createListFavorites() {
@@ -49,7 +49,7 @@ function createEpisodeRow(episode, flagShop) {
             </div>
             <div class="favorites list-group-item">
                 <li class="row d-flex">
-                    <div class="pl-0 col-6 text-break text-left">${episode.description}</div>
+                    <div class="pl-0 col-6 text-break text-left">${episode.description}${episode.id_partner ? `<small class="text-success ml-3">Sponsored by ${episode.id_partner}</small>` : ``}</div>
                     <div class="col-3 text-right">${moment(episode.date).format('DD-MM-YYYY')}</div>
                     <div class="col text-right" id="price">${episode.price == '0' ? `Gratis ` : episode.price + ` €`}</div>
                     <span class="col text-right text-success">${flagShop != '0' ? `Acquistato ` : ``}</span>                           

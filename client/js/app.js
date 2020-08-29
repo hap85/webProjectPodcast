@@ -29,6 +29,8 @@ class App {
         this.userMenu = document.querySelector('#user-menu');
         this.episode = "";
         this.searchForm = document.getElementById('search-form');
+        const inputAudio = document.getElementById('input-audio');
+        
         // Check if user exist in localStorage
         if (localStorage.getItem('userId') && localStorage.getItem('username')) {
             this.user = {
@@ -110,7 +112,6 @@ class App {
         localStorage.removeItem('username');
         document.querySelectorAll('.only-logged').forEach(el => {
             el.classList.add('invisible');
-            console.log(el);
         });
         this.loginLink.classList.remove('invisible');
         page('/');
@@ -128,7 +129,7 @@ class App {
                     password: form.password.value,
                     creator: form.creator.checked
                 }
-                console.log(user);
+                
                 await Api.createUser(user);
                 //this.logoutLink.classList.remove('invisible');
 
@@ -228,7 +229,7 @@ class App {
             if(this.user){
                 const shop = await Api.getShop(this.user.id, episode.id_episode)
                 if(shop.id_episode!==undefined){
-                    console.log(shop);
+                    
                     flagShop=1;
                 }
             }
@@ -250,7 +251,7 @@ class App {
         const textSearch = urlParams.get('textSearch');
         const typeSearch = urlParams.get('serie');
         const categorieSearch = urlParams.get('categorie');
-        console.log(categorieSearch);
+        
         const categorieSelect = document.getElementById('search-categorie');
         const textInput = document.getElementById('query');
         const serieRadio = document.getElementById('serie-radio');
@@ -268,7 +269,7 @@ class App {
         }
         textInput.value = textSearch;
         ctx.typeSearch = typeSearch;
-        console.log(typeSearch);
+        
         if(typeSearch=="0"){
             const episodes = await Api.getEpisodesByDescription(textSearch);
             ctx.episodes = episodes;
@@ -295,7 +296,6 @@ class App {
                 if(this.user){
                     const shop = await Api.getShop(this.user.id, episode.id_episode)
                     if(shop.id_episode!==undefined){
-                        console.log(shop);
                         flagShop=1;
                     }
                 }
@@ -325,7 +325,6 @@ class App {
 
     loadFollowSeries = async (ctx, next) => {
         const series = await Api.getFollowSeries(this.user.id);
-        console.log(this.user.id);
         ctx.series = series;
         next();
     }
@@ -338,7 +337,6 @@ class App {
         this.mainContainer.insertAdjacentHTML('beforeend', createListSeries());
         const listSeries = this.mainContainer.querySelector('#list');
         for (let serie of ctx.series) {
-            //console.log(serie);
             const serieRow = createSerieRow(serie);
             listSeries.insertAdjacentHTML('beforeend', serieRow);
         }
@@ -352,7 +350,6 @@ class App {
         const categorie = ctx.params.categorie;
         const series = await Api.getSeriesFromCategorie(categorie);
         ctx.series = series;
-        console.log(series);
         next();
     }
     showSeriesFromCategorie = async (ctx) => {
@@ -368,10 +365,8 @@ class App {
     }
 
     loadSeriesFromUser = async (ctx, next) => {
-        console.log(this.user);
         const series = await Api.getSeriesFromUser(this.user.id);
         ctx.series = series;
-        console.log(series);
         next();
     }
 
@@ -437,7 +432,6 @@ class App {
         }
         if (this.user) {
             const follower = await Api.getFollower(this.user.id, serie.id_serie);
-            console.log(follower);
             if (follower.id_follower !== undefined)
                 followBtn.innerText = "Non seguire";
             else
@@ -484,7 +478,6 @@ class App {
             if(this.user){
                 const shop = await Api.getShop(this.user.id, episode.id_episode)
                 if(shop.id_episode!=undefined){
-                    console.log(shop);
                     flagShop=1;
                 }
             }
@@ -508,9 +501,10 @@ class App {
                 episodeForm.elements['serie-id'].value = episode.id_serie;
                 episodeForm.elements['input-description'].value = episode.description;
                 episodeForm.elements['input-price'].value = episode.price;
-                episodeForm.elements['input-sponsor'].value = "";
+                
+                    episodeForm.elements['input-sponsor'].value = episode.id_partner;
+                
                 episodeForm.elements['input-audio'].value = episode.audio;
-                document.getElementById('label-audio').innerText = episode.audio;
             });
         }
         if (this.user && this.user.id == serie.id_user) {
@@ -540,7 +534,6 @@ class App {
         if(this.user){
             const shop = await Api.getShop(this.user.id, episode.id_episode)
             if(shop.id_episode!==undefined || this.user.id==serie.id_user){
-                console.log(shop);
                 flagShop=1;
             }
         }
@@ -549,12 +542,9 @@ class App {
         const alertMessage = document.getElementById('message');
         if (this.user) {
             const favorite = await Api.getFavorite(this.user.id, episode.id_episode);
-            console.log(favorite);
             if (favorite.id_userf == this.user.id) {
                 favoriteBtn.src = "https://img.icons8.com/color/40/000000/filled-star.png";
-                console.log('test');
                 document.getElementById('text-fav').innerText = "Rimuovi dai preferiti";
-                console.log('test');
                 favoriteBtn.setAttribute("data-id", "1");
             } else {
                 favoriteBtn.src = "https://img.icons8.com/color/40/000000/star--v1.png";
@@ -563,7 +553,6 @@ class App {
             }
         }
         favoriteBtn.addEventListener('click', (event) => {
-            console.log(event.target.dataset.id);
             if (!this.user) {
                 alertMessage.innerHTML = createAlert('danger', "Per aggiungere un episodio ai preferiti bisogna autenticarsi");
                 // automatically remove the flash message after 3 sec
@@ -605,7 +594,6 @@ class App {
             });
         }
         const comments = await Api.getCommentsFromEpisode(episode.id_episode);
-        console.log(comments);
         const ulComments = createListComments();
         this.mainContainer.insertAdjacentHTML('beforeend', ulComments);
         const listComments = this.mainContainer.querySelector('#list-comments');
@@ -613,7 +601,6 @@ class App {
                 listComments.innerHTML = "";
             }
         if (comments.length != 0) {
-            console.log(comments);
             let userCommentsExist = false;
             for (let comment of comments) {
                 let flag = 0;
@@ -670,7 +657,6 @@ class App {
                     }, 3000);
                 } else {
                     Api.addComment(comment);
-                    console.log(comment);
                     alertMessage.innerHTML = createAlert('success', "Commento inserito con successo");
                     // automatically remove the flash message after 3 sec
                     setTimeout(() => {
@@ -687,7 +673,6 @@ class App {
         const commentForm = document.getElementById('comment-form');
         const el = event.target;
         const comment = await Api.getCommentsFromId(el.dataset.id);
-        console.log(comment);
         commentForm.elements['input-comment'].value = comment.text;
         commentForm.elements['form-comment-id'].value = comment.id_comment;
     }
@@ -708,7 +693,6 @@ class App {
             const ep = new Episode(id_episode, id_serie, sponsor, audio, description, moment().format(), price);
             Api.updateEpisode(id_serie, ep)
                 .then(() => {
-                    document.getElementById('label-audio').innerText = "Scegli file audio";
                     episodeForm.reset();
                     document.getElementById('close-modal-episode').click();
                     page.redirect('/series/' + id_serie + '/episodes');
@@ -719,7 +703,6 @@ class App {
             // form id null ----> add episode
             //if(episodeForm.elements['form-id'].value==="")console.log("formId vuoto");
             const newEp = new Episode(null, id_serie, sponsor, audio, description, moment().format(), price);
-            console.log(newEp);
             Api.addEpisode(id_serie, newEp)
                 .then(() => {
                     episodeForm.reset();
@@ -742,7 +725,6 @@ class App {
         const x = document.getElementById("serie-categorie").selectedIndex;
         const y = document.getElementById("serie-categorie").options;
         const categorie = y[x].text;
-        console.log(categorie);
         const img = serieForm.elements['serie-img'].value;
         if (id_serie && id_serie !== "") {
             const serie = Api.getSerie(id_serie);
@@ -758,7 +740,6 @@ class App {
         } else {
             // form id null ----> add serie
             const newSerie = new Serie(null, this.user.id, title, description, img, categorie, this.user.username);
-            console.log(newSerie);
             Api.addSerie(newSerie)
                 .then(() => {
                     serieForm.reset();
@@ -834,7 +815,6 @@ class App {
                 page.redirect('/my-series');
                 break;
             case "Episodi preferiti":
-                console.log(this.user);
                 page.redirect('/favorites/');
             default:
         }
@@ -869,7 +849,6 @@ class App {
                     creditCard: form.creditCard.value,
                     cvc: form.cvc.value
                 };
-                console.log(paymentInformation);
                 await Api.addEpisodeToShop(id_episode, paymentInformation);
 
                 alertMessage.innerHTML = createAlert('success', `Episodio acquistato`);

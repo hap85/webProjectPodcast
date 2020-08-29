@@ -438,6 +438,7 @@ app.post('/api/shop/:id_episode', [
     body('surname').notEmpty(),
     body('creditCard').notEmpty(),
     body('creditCard').isNumeric(),
+    body('creditCard').isLength(16),
     body('cvc').notEmpty(),
     body('cvc').isNumeric(),
     body('cvc').isLength(3),

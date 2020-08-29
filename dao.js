@@ -139,8 +139,8 @@ exports.updateSerie = function(id, newSerie) {
 }
 exports.updateEpisode = function(id, newEpisode) {
     return new Promise((resolve, reject) => {
-        const sql = 'UPDATE episodes SET audio = ?, description = ?, date = ?, price = ? WHERE id_episode = ?';
-        db.run(sql, [newEpisode.audio, newEpisode.description, newEpisode.date, newEpisode.price, id], function (err) {
+        const sql = 'UPDATE episodes SET audio = ?, description = ?, id_partner = ?, date = ?, price = ? WHERE id_episode = ?';
+        db.run(sql, [newEpisode.audio, newEpisode.description, newEpisode.id_partner, newEpisode.date, newEpisode.price, id], function (err) {
             if(err){
                 reject(err);
             } else if (this.changes === 0)
