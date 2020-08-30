@@ -27,9 +27,7 @@ class App {
         this.logoutLink = document.querySelector('#logout');
         this.loginLink = document.querySelector('#login');
         this.userMenu = document.querySelector('#user-menu');
-        this.episode = "";
         this.searchForm = document.getElementById('search-form');
-        const inputAudio = document.getElementById('input-audio');
         
         // Check if user exist in localStorage
         if (localStorage.getItem('userId') && localStorage.getItem('username')) {
@@ -131,7 +129,6 @@ class App {
                 }
                 
                 await Api.createUser(user);
-                //this.logoutLink.classList.remove('invisible');
 
                 alertMessage.innerHTML = createAlert('success', `Utente registrato con successo`);
 
@@ -701,7 +698,6 @@ class App {
                 });
         } else {
             // form id null ----> add episode
-            //if(episodeForm.elements['form-id'].value==="")console.log("formId vuoto");
             const newEp = new Episode(null, id_serie, sponsor, audio, description, moment().format(), price);
             Api.addEpisode(id_serie, newEp)
                 .then(() => {
