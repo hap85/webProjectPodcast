@@ -23,7 +23,7 @@ Lanciare il server digitando da terminale VSCode:
 
 ## Dati utenti registrati
 
-#### Utente 1
+### Utente 1
 
 username: **Pippo**
 
@@ -33,7 +33,8 @@ password: **00000000**
 
 creator: **true**
 
-#### Utente 2
+
+### Utente 2
 
 username: **Pluto**
 
